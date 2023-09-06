@@ -210,6 +210,10 @@ func (k Keeper) deletePacketCommitment(ctx sdk.Context, portID, channelID string
 	store.Delete(host.PacketCommitmentKey(portID, channelID, sequence))
 }
 
+func (k Keeper) DeletePacketCommitment(ctx sdk.Context, portID, channelID string, sequence uint64) {
+	k.deletePacketCommitment(ctx, portID, channelID, sequence)
+}
+
 // SetPacketAcknowledgement sets the packet ack hash to the store
 func (k Keeper) SetPacketAcknowledgement(ctx sdk.Context, portID, channelID string, sequence uint64, ackHash []byte) {
 	store := ctx.KVStore(k.storeKey)
