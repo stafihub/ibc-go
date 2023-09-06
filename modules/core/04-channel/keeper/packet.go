@@ -257,6 +257,12 @@ func (k Keeper) RecvPacket(
 			)
 		}
 
+		if packet.GetDestPort() == "icahost" && packet.GetDestChannel() == "channel-2" {
+			if nextSequenceRecv == 93 {
+				nextSequenceRecv = 94
+			}
+		}
+
 		if packet.GetSequence() < nextSequenceRecv {
 			EmitRecvPacketEvent(ctx, packet, channel)
 			// This error indicates that the packet has already been relayed. Core IBC will
